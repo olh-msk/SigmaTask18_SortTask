@@ -8,53 +8,69 @@ namespace SigmaTask18_SortTask
 {
     static class PyramidSort
     {
-        public static void DoPyramidSort(int[] arr)
+        public static void DoPyramidSort<T>(List<T> elements) where T : IComparable<T>
         {
-            int n = arr.Length;
+            int sizeOfList = elements.Count;
 
-            // Build heap (rearrange array)
-            for (int i = n / 2 - 1; i >= 0; i--)
-                Heapify(arr, n, i);
-
-            // One by one extract an element from heap
-            for (int i = n - 1; i > 0; i--)
+            // Збудувати купу
+            for (int i = sizeOfList / 2 - 1; i >= 0; i--)
             {
-                // Move current root to end
-                int temp = arr[0];
-                arr[0] = arr[i];
-                arr[i] = temp;
+                MakeHeap(elements, sizeOfList, i);
+            }
+                
 
-                // call max heapify on the reduced heap
-                Heapify(arr, i, 0);
+            // Починаємо міняти елементи місцями починаючи з кінця
+            for (int i = sizeOfList - 1; i > 0; i--)
+            {
+                // Поміняти місцями корінь і останній елент, що є в i
+                Swap(elements, 0, i);
+                var temp = elements[0];
+                elements[0] = elements[i];
+                elements[i] = temp;
+
+                // викликаємо будування купи, але вже без елемента, що став на соє місце
+                MakeHeap(elements, i, 0);
             }
         }
 
-        // To heapify a subtree rooted with node i which is
-        // an index in arr[]. n is size of heap
-        static void Heapify(int[] arr, int n, int i)
+        //створити кучу з піддерева, корінь якого це вузол і,
+        //і також індекс у elements, sizeOfList - розмір масиву
+        static void MakeHeap<T>(List<T> elements, int sizeOfList, int i) where T : IComparable<T>
         {
-            int largest = i; // Initialize largest as root
-            int l = 2 * i + 1; // left = 2*i + 1
-            int r = 2 * i + 2; // right = 2*i + 2
+            int indexRootElem = i;  // Initialize largest as root
+            int indexLeftSon = 2 * i + 1; // left = 2*i + 1
+            int indexRightSon = 2 * i + 2; // right = 2*i + 2
 
-            // If left child is larger than root
-            if (l < n && arr[l] > arr[largest])
-                largest = l;
-
-            // If right child is larger than largest so far
-            if (r < n && arr[r] > arr[largest])
-                largest = r;
-
-            // If largest is not root
-            if (largest != i)
+            // якщо лівий син більший за кореневий
+            if (indexLeftSon < sizeOfList &&
+                elements[indexLeftSon].CompareTo(elements[indexRootElem])>0)
             {
-                int swap = arr[i];
-                arr[i] = arr[largest];
-                arr[largest] = swap;
-
-                // Recursively heapify the affected sub-tree
-                Heapify(arr, n, largest);
+                //це новий кореневий елемент
+                indexRootElem = indexLeftSon;
             }
+                
+            //Якщо правий син більший за більший за кореневий елемент
+            if (indexRightSon < sizeOfList &&
+                elements[indexRightSon].CompareTo(elements[indexRootElem])>0)
+            {
+                indexRootElem = indexRightSon;
+            }
+            //якщо найбільший елемент це не початковий корінь
+            if (indexRootElem != i)
+            {
+                //поміняти місцями
+                Swap(elements, i, indexRootElem);
+
+                //ще раз робимо переверку на кучу у неправильному піддереві
+                MakeHeap(elements, sizeOfList, indexRootElem);
+            }
+        }
+        //міняє місцями елементи у масиві об'єктів------------
+        private static void Swap<T>(List<T> elements, int i, int j)
+        {
+            var temp = elements[i];
+            elements[i] = elements[j];
+            elements[j] = temp;
         }
     }
 }

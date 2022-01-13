@@ -40,9 +40,11 @@ namespace SigmaTask18_SortTask
                 Console.WriteLine("age:{0}\tname: {1}",personList[i].Age,personList[i].Name);
             }
             Console.WriteLine("\nAfter sort by age: ");
-            QuikSort.Quick_sort<Person>(personList, 5, personList.Count-1, false);
 
-            //personList = QuikSort.GeneralQuickSort<Person>(personList,0,personList.Count);
+            PyramidSort.DoPyramidSort<Person>(personList);
+
+            //QuikSort.GeneralQuikSort<Person>(personList, 5, personList.Count-1, false);
+
             for (int i = 0; i < listSize; i++)
             {
                 Console.WriteLine("i={2}\tage:{0}\tname: {1}", personList[i].Age, personList[i].Name,i);

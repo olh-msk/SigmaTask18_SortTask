@@ -14,7 +14,7 @@ namespace SigmaTask18_SortTask
         //inGrowth - сортувати у зростання чи спадання
         //isParent - показує чи виклик функції є першим, необхідно, щоб коректоно працювало inGrowth
         //бо функція рекурсивна і обертання використовується до інших викликів
-        public static void Quick_sort<T>(List<T> elements, int first, int last, bool inGrowth, bool isParent=true) where T : IComparable<T>
+        public static void GeneralQuikSort<T>(List<T> elements, int first, int last, bool inGrowth, bool isParent=true) where T : IComparable<T>
         {
             //умова виходу, розмір масиву є 1
             if (elements.Count() < 2 || first>last)
@@ -74,11 +74,11 @@ namespace SigmaTask18_SortTask
             //розбиття на дві підмножини
             if (first < j)
             {
-                Quick_sort(elements, first, j, inGrowth,false);
+                GeneralQuikSort(elements, first, j, inGrowth,false);
             }
             if (last > i)
             {
-                Quick_sort(elements, i, last, inGrowth,false);
+                GeneralQuikSort(elements, i, last, inGrowth,false);
             }
 
             //посортувати у спадання якщо заданий параметр-----
@@ -88,7 +88,7 @@ namespace SigmaTask18_SortTask
             }
         }
         //міняє місцями------------
-        private static void Swap<T>(List<T> elements,int i, int j) where T : IComparable<T>
+        private static void Swap<T>(List<T> elements,int i, int j)
         {
             var temp = elements[i];
             elements[i] = elements[j];
