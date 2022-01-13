@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SigmaTask18_SortTask
 {
+    //класи для тестування=============================
     class Person: IComparable<Person>
     {
         public string Name { get; set; }
@@ -48,14 +49,33 @@ namespace SigmaTask18_SortTask
         }
     }
 
-    class Table
+    class Table: IComparable<Table>
     {
-        public double Weight { get; set; }
-        public double Width { get; set; }
-        public double Height { get; set; }
+        public int Weight { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
         public Table()
         {
+            Randomize();
+        }
+        //випадково заповнює атрибути
+        void Randomize()
+        {
+            Random r = new Random();
+            this.Weight = r.Next(1, 200);
+            this.Width = r.Next(1,200);
+            this.Height = r.Next(1,200);
+        }
 
+        //порівнює по висоті
+        public int CompareTo(Table? other)
+        {
+            if (other is null)
+            {
+                throw new ArgumentException("Object is NULL");
+            }
+
+            return this.Height.CompareTo(other.Height);
         }
     }
 }

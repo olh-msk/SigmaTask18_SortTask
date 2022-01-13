@@ -8,28 +8,7 @@ namespace SigmaTask18_SortTask
     {
         static void Main(string[] args)
         {
-            //Console.Write("N = ");
-            //var len = Convert.ToInt32(Console.ReadLine());
-            //var a = new int[len];
-            //for (var i = 0; i < a.Length; ++i)
-            //{
-            //    Console.Write("a[{0}] = ", i);
-            //    a[i] = Convert.ToInt32(Console.ReadLine());
-            //}
-
-            //Console.WriteLine("Впорядкований масив: {0}", string.Join(", ", QuikSort.DoQuickSort(a)));
-
-            //Console.WriteLine("PyramidSort: \n");
-
-            //int[] arr = { 12, 11, 13, 5, 6, 7 };
-            //int n = arr.Length;
-
-            //PyramidSort.DoPyramidSort(arr);
-
-            //Console.WriteLine("Sorted array is");
-            //PyramidSort.PrintArray(arr);
-
-            //Console.ReadLine();
+            //вивід у main лише для показових цілей   ===================
 
             int listSize = 10;
             List<Person> personList = new List<Person>();
@@ -39,11 +18,14 @@ namespace SigmaTask18_SortTask
                 personList.Add(new Person());
                 Console.WriteLine("age:{0}\tname: {1}",personList[i].Age,personList[i].Name);
             }
+
             Console.WriteLine("\nAfter sort by age: ");
 
-            PyramidSort.GeneralHeapSort<Person>(personList);
+            // межі [2,8)
+            PyramidSort.GeneralHeapSort<Person>(ref personList, 2, 8, false);
 
-            //QuikSort.GeneralQuikSort<Person>(personList, 5, personList.Count-1, false);
+            // межі [1,7]
+            //QuikSort.GeneralQuikSort<Person>(personList, 1, 7, false);
 
             for (int i = 0; i < listSize; i++)
             {
