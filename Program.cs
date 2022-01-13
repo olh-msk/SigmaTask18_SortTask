@@ -41,7 +41,7 @@ namespace SigmaTask18_SortTask
             }
             Console.WriteLine("\nAfter sort by age: ");
 
-            PyramidSort.DoPyramidSort<Person>(personList);
+            PyramidSort.GeneralHeapSort<Person>(personList);
 
             //QuikSort.GeneralQuikSort<Person>(personList, 5, personList.Count-1, false);
 

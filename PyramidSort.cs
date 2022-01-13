@@ -8,7 +8,7 @@ namespace SigmaTask18_SortTask
 {
     static class PyramidSort
     {
-        public static void DoPyramidSort<T>(List<T> elements) where T : IComparable<T>
+        public static void GeneralHeapSort<T>(List<T> elements) where T : IComparable<T>
         {
             int sizeOfList = elements.Count;
 
@@ -24,11 +24,8 @@ namespace SigmaTask18_SortTask
             {
                 // Поміняти місцями корінь і останній елент, що є в i
                 Swap(elements, 0, i);
-                var temp = elements[0];
-                elements[0] = elements[i];
-                elements[i] = temp;
 
-                // викликаємо будування купи, але вже без елемента, що став на соє місце
+                // викликаємо будування купи, але вже без елемента, що став на своє місце
                 MakeHeap(elements, i, 0);
             }
         }
@@ -37,13 +34,13 @@ namespace SigmaTask18_SortTask
         //і також індекс у elements, sizeOfList - розмір масиву
         static void MakeHeap<T>(List<T> elements, int sizeOfList, int i) where T : IComparable<T>
         {
-            int indexRootElem = i;  // Initialize largest as root
-            int indexLeftSon = 2 * i + 1; // left = 2*i + 1
-            int indexRightSon = 2 * i + 2; // right = 2*i + 2
+            int indexRootElem = i;  // ініціалізуємо найбільший елем як кореневий
+            int indexLeftSon = (2 * i) + 1; // лівий син має індекс 2*i + 1
+            int indexRightSon = (2 * i) + 2; // правий син має індекс 2*i + 2
 
             // якщо лівий син більший за кореневий
             if (indexLeftSon < sizeOfList &&
-                elements[indexLeftSon].CompareTo(elements[indexRootElem])>0)
+                elements[indexLeftSon].CompareTo(elements[indexRootElem]) > 0)
             {
                 //це новий кореневий елемент
                 indexRootElem = indexLeftSon;
@@ -51,7 +48,7 @@ namespace SigmaTask18_SortTask
                 
             //Якщо правий син більший за більший за кореневий елемент
             if (indexRightSon < sizeOfList &&
-                elements[indexRightSon].CompareTo(elements[indexRootElem])>0)
+                elements[indexRightSon].CompareTo(elements[indexRootElem]) > 0)
             {
                 indexRootElem = indexRightSon;
             }
