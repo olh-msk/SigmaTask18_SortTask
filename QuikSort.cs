@@ -57,12 +57,9 @@ namespace SigmaTask18_SortTask
                         break;
                     }
                 }
-                //swap можна в окрему функцію винести
                 if (i <= j)
                 {
-                    var temp = elements[i];
-                    elements[i] = elements[j];
-                    elements[j] = temp;
+                    Swap(elements, i, j);
                     //починаємо заново
                     i++;
                     j--;
@@ -89,6 +86,13 @@ namespace SigmaTask18_SortTask
             {
                 elements.Reverse(first,last-first+1);
             }
+        }
+        //міняє місцями------------
+        private static void Swap<T>(List<T> elements,int i, int j) where T : IComparable<T>
+        {
+            var temp = elements[i];
+            elements[i] = elements[j];
+            elements[j] = temp;
         }
     }
 }
