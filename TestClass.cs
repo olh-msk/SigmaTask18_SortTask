@@ -37,7 +37,7 @@ namespace SigmaTask18_SortTask
             }
             return this.Age.CompareTo(person.Age);
         }
-        //порівнянн по імені
+        //порівнянн по віку
         public int CompareTo(Person? person)
         {
             if (person is null)

@@ -8,12 +8,14 @@ namespace SigmaTask18_SortTask
 {
     public static class QuikSort
     {
-        //швидке сортування===================
+        //==================
+        //швидке сортування
         //elements - сам масив об'єктів
         //fisrt,last,  last це має бути (count -1) тобто межі включно є [first,last], наприклад [1,3] 
         //inGrowth - сортувати у зростання чи спадання
         //isParent - показує чи виклик функції є першим, необхідно, щоб коректоно працювало inGrowth
         //бо функція рекурсивна і обертання використовується до інших викликів
+        //====================
         public static void GeneralQuikSort<T>(List<T> elements, int first, int last, bool inGrowth, bool isParent=true) where T : IComparable<T>
         {
             //умова виходу, розмір масиву є 1
@@ -64,8 +66,7 @@ namespace SigmaTask18_SortTask
                     i++;
                     j--;
                 }
-                //інакше кінець пошуку, розбиваємо
-                //множину на 2
+                //інакше кінець пошуку
                 else
                 {
                     break;
