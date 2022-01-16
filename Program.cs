@@ -8,38 +8,23 @@ namespace SigmaTask18_SortTask
     {
         static void Main(string[] args)
         {
-            //======================
+            Person[] persons = {new Person(),new Person(), new Person(),
+            new Person(), new Person(), new Person(), new Person(), new Person()
+            , new Person(), new Person(), new Person(), new Person()};
 
-            //вивід у main лише для показових цілей
-
-            //не реалізовано сортування по вибраних атрибутах і параметр сортування
-            //не реалізовано ітеративний вигляд
-
-            //стабільність можна перевірити практично, якщо посортувати за 2 атрибутами масив
-            //але вибір атрибуту для сортування не реалізований
-
-            //=====================
-
-            int listSize = 10;
-            List<Person> personList = new List<Person>();
-            Console.WriteLine("Before sort: ");
-            for(int i = 0; i <listSize; i++)
+            foreach (Person person in persons)
             {
-                personList.Add(new Person());
-                Console.WriteLine("age:{0}\tname: {1}",personList[i].Age,personList[i].Name);
+                Console.WriteLine(person);
             }
 
-            Console.WriteLine("\nAfter sort by age: ");
+            Person[] sortedPersons = SortClass.GeneralQuikSort<Person>(
+                persons, Person.CompareByAge, 0, persons.Length - 2, SortOrder.inGrowth,
+                pers => pers.Age < 100);
 
-            // межі [2,8)
-            PyramidSort.GeneralHeapSort<Person>(ref personList, 2, 8, false);
-
-            // межі [1,7]
-            //QuikSort.GeneralQuikSort<Person>(personList, 1, 7, false);
-
-            for (int i = 0; i < listSize; i++)
+            Console.WriteLine("Sorted By Age:\n");
+            foreach (Person person in persons)
             {
-                Console.WriteLine("i={2}\tage:{0}\tname: {1}", personList[i].Age, personList[i].Name,i);
+                Console.WriteLine(person);
             }
         }
     }

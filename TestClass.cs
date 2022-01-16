@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace SigmaTask18_SortTask
 {
+    enum SortOrder {inGrowth, inDecline };
+
+    delegate bool Comparer<T>(T par1, T par2, SortOrder order);
+
     //класи для тестування=============================
-    class Person: IComparable<Person>
+    class Person
     {
         public string Name { get; set; }
         public int Age { get; set; }
@@ -29,53 +33,29 @@ namespace SigmaTask18_SortTask
             }
         }
 
-        public int CompareByAge(Person? person)
+        static public bool CompareByAge(Person person1, Person person2, SortOrder order)
         {
-            if (person is null)
+            switch (order)
             {
-                throw new ArgumentException("Object is NULL");
+                case SortOrder.inDecline:
+                    return person1.Age < person2.Age;
+                default:
+                    return person1.Age > person2.Age;
             }
-            return this.Age.CompareTo(person.Age);
         }
-        //порівнянн по віку
-        public int CompareTo(Person? person)
+        static public bool CompareByName(Person person1, Person person2, SortOrder order)
         {
-            if (person is null)
+            switch (order)
             {
-                throw new ArgumentException("Object is NULL");
+                case SortOrder.inDecline:
+                    return person1.Name.CompareTo(person2.Name) < 0;
+                default:
+                    return person1.Name.CompareTo(person2.Name) > 0;
             }
-
-            return this.Age.CompareTo(person.Age);
         }
-    }
-
-    class Table: IComparable<Table>
-    {
-        public int Weight { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public Table()
+        public override string ToString()
         {
-            Randomize();
-        }
-        //випадково заповнює атрибути
-        void Randomize()
-        {
-            Random r = new Random();
-            this.Weight = r.Next(1, 200);
-            this.Width = r.Next(1,200);
-            this.Height = r.Next(1,200);
-        }
-
-        //порівнює по висоті
-        public int CompareTo(Table? other)
-        {
-            if (other is null)
-            {
-                throw new ArgumentException("Object is NULL");
-            }
-
-            return this.Height.CompareTo(other.Height);
+            return string.Format($"Age: {Age}  \tName: {Name}\n");
         }
     }
 }
