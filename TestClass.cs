@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace SigmaTask18_SortTask
 {
-    enum SortOrder {inGrowth, inDecline };
-
-    delegate bool Comparer<T>(T par1, T par2, SortOrder order);
+    
 
     //класи для тестування=============================
     class Person
@@ -38,9 +36,9 @@ namespace SigmaTask18_SortTask
             switch (order)
             {
                 case SortOrder.inDecline:
-                    return person1.Age < person2.Age;
-                default:
                     return person1.Age > person2.Age;
+                default:
+                    return person1.Age < person2.Age;
             }
         }
         static public bool CompareByName(Person person1, Person person2, SortOrder order)
@@ -48,9 +46,9 @@ namespace SigmaTask18_SortTask
             switch (order)
             {
                 case SortOrder.inDecline:
-                    return person1.Name.CompareTo(person2.Name) < 0;
-                default:
                     return person1.Name.CompareTo(person2.Name) > 0;
+                default:
+                    return person1.Name.CompareTo(person2.Name) < 0;
             }
         }
         public override string ToString()
